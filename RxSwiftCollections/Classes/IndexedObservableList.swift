@@ -126,9 +126,9 @@ class UpdateHolder<T>: NSObject {
 
 private class IndexedObservableList<T, U>: ObservableList<U> {
     private let list: ObservableList<T>
-    private let transform: ((T, Observable<T?>, Observable<T?>) -> U)
+    private let transform: ((T, Observable<T?>, Observable<T?>) throws -> U)
     
-    init(_ list: ObservableList<T>, transform: @escaping ((T, Observable<T?>, Observable<T?>) -> U)) {
+    init(_ list: ObservableList<T>, transform: @escaping ((T, Observable<T?>, Observable<T?>) throws -> U)) {
         self.list = list
         self.transform = transform
     }
@@ -177,7 +177,8 @@ private class IndexedObservableList<T, U>: ObservableList<U> {
                         preconditionFailure("Index must always be created")
                     }
                     
-                    return transform(value, indexWrapper.previous, indexWrapper.next)
+                    // swiftlint:disable force_try
+                    return try! transform(value, indexWrapper.previous, indexWrapper.next)
                 }), changes: update.changes)
             }
     }
@@ -185,7 +186,7 @@ private class IndexedObservableList<T, U>: ObservableList<U> {
 
 public extension ObservableList {
     
-    func indexedMap<U>(_ transform: @escaping ((T, Observable<T?>, Observable<T?>) -> U)) -> ObservableList<U> {
+    func indexedMap<U>(_ transform: @escaping ((T, Observable<T?>, Observable<T?>) throws -> U)) -> ObservableList<U> {
         return IndexedObservableList<T, U>(self, transform: transform)
     }
 }

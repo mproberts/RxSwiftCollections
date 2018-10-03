@@ -38,6 +38,17 @@ public extension Single {
                     .flatMapLatest { value -> Observable<Update<U>> in
                         // swiftlint:disable force_try
                         return try! selector(value).updates
-                    })
+            })
+    }
+}
+
+public extension Observable {
+    public func flatMapList<U>(_ selector: @escaping (E) throws -> ObservableList<U>)
+        -> ObservableList<U> {
+            return WrappedObservableList(
+                self.flatMapLatest { value -> Observable<Update<U>> in
+                        // swiftlint:disable force_try
+                        return try! selector(value).updates
+            })
     }
 }
