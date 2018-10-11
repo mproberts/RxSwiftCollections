@@ -13,10 +13,11 @@ private class SizingObservableListSectionedDataSource<S, T>: ObservableListSecti
     init(sections: Observable<Update<S>>,
          sectionTransformer: @escaping ((S) -> ObservableList<T>),
          cellCreator: @escaping ((UICollectionView, IndexPath, T) -> UICollectionViewCell),
-         cellSizer: @escaping ((IndexPath, T) -> CGSize)) {
+         cellSizer: @escaping ((IndexPath, T) -> CGSize),
+         valueSelected: @escaping ((T) -> Void)) {
         self.cellSizer = cellSizer
         
-        super.init(sections: sections, sectionTransformer: sectionTransformer, cellCreator: cellCreator)
+        super.init(sections: sections, sectionTransformer: sectionTransformer, cellCreator: cellCreator, valueSelected: valueSelected)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -39,13 +40,14 @@ private class SizingObservableListSectionedDataSource<S, T>: ObservableListSecti
     }
 }
 
-private class ObservableListSectionedDataSource<S, T>: NSObject, UICollectionViewDataSource {
+private class ObservableListSectionedDataSource<S, T>: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
     fileprivate var currentDataSources: [ObservableListDataSource<T>]?
     fileprivate var currentSections: [S]?
     fileprivate var currentSubscriptions: [Disposable]?
     fileprivate let observableSections: Observable<Update<S>>
     fileprivate let cellCreator: ((UICollectionView, IndexPath, T) -> UICollectionViewCell)
+    fileprivate let valueSelected: ((T) -> Void)
     
     fileprivate let sectionTransformer: ((S) -> ObservableList<T>)
     
@@ -53,10 +55,12 @@ private class ObservableListSectionedDataSource<S, T>: NSObject, UICollectionVie
     
     init(sections: Observable<Update<S>>,
          sectionTransformer: @escaping ((S) -> ObservableList<T>),
-         cellCreator: @escaping ((UICollectionView, IndexPath, T) -> UICollectionViewCell)) {
+         cellCreator: @escaping ((UICollectionView, IndexPath, T) -> UICollectionViewCell),
+         valueSelected: @escaping ((T) -> Void)) {
         self.observableSections = sections
         self.sectionTransformer = sectionTransformer
         self.cellCreator = cellCreator
+        self.valueSelected = valueSelected
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -77,6 +81,15 @@ private class ObservableListSectionedDataSource<S, T>: NSObject, UICollectionVie
         let item = section.currentList![indexPath.row]
         
         return cellCreator(collectionView, indexPath, item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // swiftlint:disable:next force_unwrapping
+        let section = currentDataSources![indexPath.section]
+        // swiftlint:disable:next force_unwrapping
+        let item = section.currentList![indexPath.row]
+        
+        valueSelected(item)
     }
     
     private func bind(to collectionView: UICollectionView, section: S, sectionIndex: Int) {
@@ -180,11 +193,13 @@ public extension ObservableList {
     
     func bindSections<S, CellType: UICollectionViewCell>(to collectionView: UICollectionView,
                                                          with adapter: @escaping ((UICollectionView, IndexPath, S) -> CellType),
-                                                         sectionedBy sectionTransformer: @escaping ((T) -> ObservableList<S>)) -> Disposable {
+                                                         sectionedBy sectionTransformer: @escaping ((T) -> ObservableList<S>),
+                                                         valueSelected: @escaping ((S) -> Void) = { _ in }) -> Disposable {
         
         let dataSource = ObservableListSectionedDataSource(sections: self.updates,
                                                            sectionTransformer: sectionTransformer,
-                                                           cellCreator: adapter)
+                                                           cellCreator: adapter,
+                                                           valueSelected: valueSelected)
         let disposable = dataSource.bind(to: collectionView)
         
         collectionView.dataSource = dataSource
@@ -195,11 +210,13 @@ public extension ObservableList {
     func bindSections<S, CellType: UICollectionViewCell>(to collectionView: UICollectionView,
                                                          with adapter: @escaping ((UICollectionView, IndexPath, S) ->   CellType),
                                                          sizedBy sizer: @escaping ((IndexPath, S) -> CGSize),
-                                                         sectionedBy sectionTransformer: @escaping ((T) -> ObservableList<S>)) -> Disposable {
+                                                         sectionedBy sectionTransformer: @escaping ((T) -> ObservableList<S>),
+                                                         valueSelected: @escaping ((S) -> Void) = { _ in }) -> Disposable {
         let dataSource = SizingObservableListSectionedDataSource(sections: self.updates,
                                                                  sectionTransformer: sectionTransformer,
                                                                  cellCreator: adapter,
-                                                                 cellSizer: sizer)
+                                                                 cellSizer: sizer,
+                                                                 valueSelected: valueSelected)
         let disposable = dataSource.bind(to: collectionView)
         
         collectionView.dataSource = dataSource

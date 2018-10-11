@@ -29,14 +29,16 @@ class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentList?.count ?? 0
+        let count = currentList?.count
+        
+        return count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // swiftlint:disable:next force_unwrapping
         let item = currentList![indexPath.item]
-
+        
         return cellCreator(collectionView, indexPath, item)
     }
     
@@ -56,7 +58,7 @@ class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource {
                     return false
                 }) == nil else {
                     this.currentList = update.list
-                    collectionView.reloadData()
+                    collectionView.reloadSections(IndexSet(integer: this.sectionIndex))
                     
                     return
                 }
@@ -78,7 +80,7 @@ class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource {
                         }
                     }
                 }, completion: { _ in })
-            }, onError: { (_) in
+                }, onError: { (_) in
             }, onCompleted: {
             })
     }
@@ -151,7 +153,7 @@ public extension ObservableList {
                         }
                         
                         return adapter(cell, indexPath, value)
-                    },
+        },
                     sizedBy: sizer)
     }
     
