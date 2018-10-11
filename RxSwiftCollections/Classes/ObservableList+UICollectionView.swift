@@ -10,7 +10,7 @@ import RxSwift
 class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource {
     
     var sectionIndex: Int
-    fileprivate var currentList: LazyCollection<[T]>?
+    var currentList: LazyCollection<[T]>?
     fileprivate let observableList: Observable<Update<T>>
     fileprivate let cellCreator: ((UICollectionView, IndexPath, T) -> UICollectionViewCell)
     

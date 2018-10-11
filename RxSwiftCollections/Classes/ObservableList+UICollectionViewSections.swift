@@ -6,9 +6,41 @@
 //
 import RxSwift
 
+private class SizingObservableListSectionedDataSource<S, T>: ObservableListSectionedDataSource<S, T>, UICollectionViewDelegateFlowLayout {
+    
+    fileprivate let cellSizer: ((IndexPath, T) -> CGSize)
+    
+    init(sections: Observable<Update<S>>,
+         sectionTransformer: @escaping ((S) -> ObservableList<T>),
+         cellCreator: @escaping ((UICollectionView, IndexPath, T) -> UICollectionViewCell),
+         cellSizer: @escaping ((IndexPath, T) -> CGSize)) {
+        self.cellSizer = cellSizer
+        
+        super.init(sections: sections, sectionTransformer: sectionTransformer, cellCreator: cellCreator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard collectionView.numberOfSections > indexPath.section else {
+            return CGSize(width: 240.0, height: 240.0)
+        }
+        
+        guard collectionView.numberOfItems(inSection: indexPath.section) > indexPath.row else {
+            return CGSize(width: 240.0, height: 240.0)
+        }
+        
+        // swiftlint:disable:next force_unwrapping
+        let section = currentDataSources![indexPath.section]
+        // swiftlint:disable:next force_unwrapping
+        let item = section.currentList![indexPath.row]
+        
+        return cellSizer(indexPath, item)
+    }
+}
+
 private class ObservableListSectionedDataSource<S, T>: NSObject, UICollectionViewDataSource {
     
-    fileprivate var currentLists: LazyCollection<[LazyCollection<[T]>]>?
     fileprivate var currentDataSources: [ObservableListDataSource<T>]?
     fileprivate var currentSections: [S]?
     fileprivate var currentSubscriptions: [Disposable]?
@@ -40,8 +72,9 @@ private class ObservableListSectionedDataSource<S, T>: NSObject, UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // swiftlint:disable:next force_unwrapping
-        let section = currentLists![indexPath.section]
-        let item = section[indexPath.item]
+        let section = currentDataSources![indexPath.section]
+        // swiftlint:disable:next force_unwrapping
+        let item = section.currentList![indexPath.row]
         
         return cellCreator(collectionView, indexPath, item)
     }
@@ -155,6 +188,22 @@ public extension ObservableList {
         let disposable = dataSource.bind(to: collectionView)
         
         collectionView.dataSource = dataSource
+        
+        return AssociatedObjectDisposable(retaining: dataSource, disposing: disposable)
+    }
+    
+    func bindSections<S, CellType: UICollectionViewCell>(to collectionView: UICollectionView,
+                                                         with adapter: @escaping ((UICollectionView, IndexPath, S) ->   CellType),
+                                                         sizedBy sizer: @escaping ((IndexPath, S) -> CGSize),
+                                                         sectionedBy sectionTransformer: @escaping ((T) -> ObservableList<S>)) -> Disposable {
+        let dataSource = SizingObservableListSectionedDataSource(sections: self.updates,
+                                                                 sectionTransformer: sectionTransformer,
+                                                                 cellCreator: adapter,
+                                                                 cellSizer: sizer)
+        let disposable = dataSource.bind(to: collectionView)
+        
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource
         
         return AssociatedObjectDisposable(retaining: dataSource, disposing: disposable)
     }
