@@ -7,8 +7,9 @@
 
 import RxSwift
 
-private class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource {
+class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource {
     
+    var sectionIndex: Int
     fileprivate var currentList: LazyCollection<[T]>?
     fileprivate let observableList: Observable<Update<T>>
     fileprivate let cellCreator: ((UICollectionView, IndexPath, T) -> UICollectionViewCell)
@@ -16,8 +17,10 @@ private class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource 
     fileprivate var disposable: Disposable!
     
     init(list: Observable<Update<T>>,
+         sectionIndex: Int,
          cellCreator: @escaping ((UICollectionView, IndexPath, T) -> UICollectionViewCell)) {
         self.observableList = list
+        self.sectionIndex = sectionIndex
         self.cellCreator = cellCreator
     }
     
@@ -64,12 +67,12 @@ private class ObservableListDataSource<T>: NSObject, UICollectionViewDataSource 
                     update.changes.forEach { change in
                         switch change {
                         case .insert(let index):
-                            collectionView.insertItems(at: [IndexPath(item: index, section: 0)])
+                            collectionView.insertItems(at: [IndexPath(item: index, section: this.sectionIndex)])
                         case .delete(let index):
-                            collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+                            collectionView.deleteItems(at: [IndexPath(item: index, section: this.sectionIndex)])
                         case .move(let from, let to):
-                            collectionView.moveItem(at: IndexPath(item: from, section: 0),
-                                                    to: IndexPath(item: to, section: 0))
+                            collectionView.moveItem(at: IndexPath(item: from, section: this.sectionIndex),
+                                                    to: IndexPath(item: to, section: this.sectionIndex))
                         case .reload:
                             break
                         }
@@ -90,7 +93,7 @@ private class SizingObservableListDataSource<T>: ObservableListDataSource<T>, UI
          cellSizer: @escaping ((IndexPath, T) -> CGSize)) {
         self.cellSizer = cellSizer
         
-        super.init(list: list, cellCreator: cellCreator)
+        super.init(list: list, sectionIndex: 0, cellCreator: cellCreator)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -168,7 +171,7 @@ public extension ObservableList {
     
     func bind<CellType: UICollectionViewCell>(to collectionView: UICollectionView,
                                               with adapter: @escaping ((UICollectionView, IndexPath, T) -> CellType)) -> Disposable {
-        let dataSource = ObservableListDataSource(list: self.updates, cellCreator: adapter)
+        let dataSource = ObservableListDataSource(list: self.updates, sectionIndex: 0, cellCreator: adapter)
         let disposable = dataSource.bind(to: collectionView)
         
         collectionView.dataSource = dataSource
