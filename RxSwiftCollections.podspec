@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'RxSwiftCollections'
-  spec.version          = '0.1.0'
+  spec.version          = '0.2.0'
   spec.summary          = 'Collections for handling ansynchronous streams with RxSwift.'
 
   spec.description      = <<-DESC
