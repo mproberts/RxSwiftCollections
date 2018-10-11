@@ -14,7 +14,7 @@ target 'RxSwiftCollections_Example' do
     inherit! :search_paths
 
     pod 'Quick', '~> 1.2.0'
-    pod 'Nimble', '~> 7.0.2'
+    pod 'Nimble', '~> 7.1'
     pod 'RxBlocking', '~> 4.0'
     pod 'RxTest',     '~> 4.0'
     pod 'RxSwiftCollections', :path => '../'
