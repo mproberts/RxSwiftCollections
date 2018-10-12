@@ -1,6 +1,6 @@
 {
   "name": "RxSwiftCollections",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "summary": "Collections for handling ansynchronous streams with RxSwift.",
   "description": "A suite of collections using RxSwift to make your life easier.",
   "homepage": "https://github.com/mproberts/RxSwiftCollections",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/mproberts/RxSwiftCollections.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "platforms": {
     "ios": "8.0"

@@ -12,7 +12,7 @@ PODS:
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
   - RxSwift (4.2.0)
-  - RxSwiftCollections (0.1.0):
+  - RxSwiftCollections (0.2.0):
     - DeepDiff (~> 1.2)
     - IGListKit (~> 3.4.0)
     - RxCocoa (~> 4.0)
@@ -53,7 +53,7 @@ SPEC CHECKSUMS:
   RxBlocking: e339d8a6e752e25ade95ff858466c55436668f59
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
-  RxSwiftCollections: f61bba6df9e2cddb61e548de40eb626617625396
+  RxSwiftCollections: bae85ca6166e8cdcafd7475b33096882f0ea8c9f
   RxTest: 8da864c0ee47534f586ff18fb0c7e5b2f1fe5023
 
 PODFILE CHECKSUM: fe16cbb26d467217116fd731222a34ddae9b5081
