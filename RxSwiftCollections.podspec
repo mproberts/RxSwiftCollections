@@ -15,9 +15,17 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target = '8.0'
   spec.osx.deployment_target = '10.14'
 
-  spec.source_files = 'RxSwiftCollections/Classes/**/*'
+  spec.source_files = 'RxSwiftCollections/Classes/*'
 
   spec.dependency 'RxSwift',    '~> 4.0'
   spec.dependency 'RxCocoa',    '~> 4.0'
   spec.dependency 'DeepDiff',   '~> 1.2'
+
+  spec.subspec 'iOS' do |iosspec|
+      iosspec.source_files = 'RxSwiftCollections/Classes/**/*'
+      iosspec.frameworks = 'UIKit'
+      iosspec.dependency 'IGListKit',  '~> 3.4.0'
+  end
+
+
 end

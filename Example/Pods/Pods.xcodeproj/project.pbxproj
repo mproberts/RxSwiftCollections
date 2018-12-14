@@ -328,6 +328,10 @@
 		8494F6BE88E480A18C4193A6E0379AEC /* IGListDiffKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6DD7441AF3A5468DF57377FCBB6C3A6C /* IGListDiffKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		84D918B8C4A703380B29C1245A173CAF /* AsyncLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A2D196A1650A62767C9EDCE33AF683 /* AsyncLock.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		84DF44F178F591848CC36133C39623D4 /* IGListAdapterUpdaterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B54552BA4242F3903BB968B61845A6D /* IGListAdapterUpdaterDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85C8DD1E21C445170058745E /* ObservableList+IGListKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36085FA3A91236FAD83499B6CF98143 /* ObservableList+IGListKit.swift */; };
+		85C8DD1F21C445230058745E /* ObservableList+UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22108047F6E5B6B3991D9AA2460FE7E9 /* ObservableList+UICollectionView.swift */; };
+		85C8DD2021C445310058745E /* ObservableList+UICollectionViewSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E45828588335EB3006505C06A16A0019 /* ObservableList+UICollectionViewSections.swift */; };
+		85C8DD2121C4453B0058745E /* ObservableList+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FEACDF70CCE8671B9F1A58B9ED4181 /* ObservableList+UITableView.swift */; };
 		869472EFA570BA74640145A4E39DA526 /* DeprecationWarner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566F7D305EEF4CA65543D7190CC5FF50 /* DeprecationWarner.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		873046B1FDFC227BF61D9FCC0888D965 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C157AA82DC993A8F9A3379206C981EB7 /* Driver.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		875C3298C39285BB1654D2FAEF08F08A /* SynchronizedUnsubscribeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993525E26FB907F1787508680484E777 /* SynchronizedUnsubscribeType.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -810,7 +814,7 @@
 		20E1FF37FAC56EF8AF9998EDD691208A /* Reduce.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reduce.swift; path = RxSwift/Observables/Reduce.swift; sourceTree = "<group>"; };
 		21435A84D88BF474144622D50BF3C1DA /* RxBlocking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RxBlocking-prefix.pch"; sourceTree = "<group>"; };
 		218AD8E636DFAC8BE1B404155D95B437 /* MoveReducer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MoveReducer.swift; path = Sources/Shared/MoveReducer.swift; sourceTree = "<group>"; };
-		22108047F6E5B6B3991D9AA2460FE7E9 /* ObservableList+UICollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+UICollectionView.swift"; path = "RxSwiftCollections/Classes/ObservableList+UICollectionView.swift"; sourceTree = "<group>"; };
+		22108047F6E5B6B3991D9AA2460FE7E9 /* ObservableList+UICollectionView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+UICollectionView.swift"; path = "RxSwiftCollections/Classes/iOS/ObservableList+UICollectionView.swift"; sourceTree = "<group>"; };
 		22193BE856D86F1C9410B7D9FE7C7659 /* ExpectationMessage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpectationMessage.swift; path = Sources/Nimble/ExpectationMessage.swift; sourceTree = "<group>"; };
 		223E2E5507B57593AFCF4AF910978907 /* IGListBindingSectionController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IGListBindingSectionController.h; path = Source/IGListBindingSectionController.h; sourceTree = "<group>"; };
 		2254FCFC70C3396E5BBAF126E5031B24 /* IGListCollectionView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = IGListCollectionView.m; path = Source/IGListCollectionView.m; sourceTree = "<group>"; };
@@ -1305,7 +1309,7 @@
 		E2DD668D31D3AF83EB245D31350E37BE /* ThrowError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThrowError.swift; path = Sources/Nimble/Matchers/ThrowError.swift; sourceTree = "<group>"; };
 		E2E7FF53D2AC655E245A6ED65F2E25D2 /* RxCollectionViewDelegateProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxCollectionViewDelegateProxy.swift; path = RxCocoa/iOS/Proxies/RxCollectionViewDelegateProxy.swift; sourceTree = "<group>"; };
 		E319D20239B4EFA1C35C5CA219BAA7B6 /* SimpleObservableList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SimpleObservableList.swift; path = RxSwiftCollections/Classes/SimpleObservableList.swift; sourceTree = "<group>"; };
-		E45828588335EB3006505C06A16A0019 /* ObservableList+UICollectionViewSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+UICollectionViewSections.swift"; path = "RxSwiftCollections/Classes/ObservableList+UICollectionViewSections.swift"; sourceTree = "<group>"; };
+		E45828588335EB3006505C06A16A0019 /* ObservableList+UICollectionViewSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+UICollectionViewSections.swift"; path = "RxSwiftCollections/Classes/iOS/ObservableList+UICollectionViewSections.swift"; sourceTree = "<group>"; };
 		E482DC72FA6DEE91A33DFD541D094D3F /* Heckel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Heckel.swift; path = Sources/Shared/Algorithms/Heckel.swift; sourceTree = "<group>"; };
 		E4C418FDFE7E70A6D323C76DC5FD725A /* AdapterProtocols.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AdapterProtocols.swift; path = Sources/Nimble/Adapters/AdapterProtocols.swift; sourceTree = "<group>"; };
 		E51EE66677EAC06222DFF8F9107FED5B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1345,7 +1349,7 @@
 		F115EA09CFA8446844AB1E65FEF242AC /* Behavior.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Behavior.swift; path = Sources/Quick/Behavior.swift; sourceTree = "<group>"; };
 		F14176D48DF0BC1BD8DC3083428BF5E5 /* Platform.Linux.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Platform.Linux.swift; path = Platform/Platform.Linux.swift; sourceTree = "<group>"; };
 		F2895FC26D2DB4CC6E8BC21D5999EDAC /* IGListAdapterProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = IGListAdapterProxy.h; path = Source/Internal/IGListAdapterProxy.h; sourceTree = "<group>"; };
-		F36085FA3A91236FAD83499B6CF98143 /* ObservableList+IGListKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+IGListKit.swift"; path = "RxSwiftCollections/Classes/ObservableList+IGListKit.swift"; sourceTree = "<group>"; };
+		F36085FA3A91236FAD83499B6CF98143 /* ObservableList+IGListKit.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+IGListKit.swift"; path = "RxSwiftCollections/Classes/iOS/ObservableList+IGListKit.swift"; sourceTree = "<group>"; };
 		F46DE8190EB5EAC44BC0325961213966 /* ObserveOn.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObserveOn.swift; path = RxSwift/Observables/ObserveOn.swift; sourceTree = "<group>"; };
 		F4A71E4215446387F4D0E20923791A8C /* RefCountDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefCountDisposable.swift; path = RxSwift/Disposables/RefCountDisposable.swift; sourceTree = "<group>"; };
 		F4B3E2BCD0CF6C36F65867689F531BB6 /* UIPickerView+Rx.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIPickerView+Rx.swift"; path = "RxCocoa/iOS/UIPickerView+Rx.swift"; sourceTree = "<group>"; };
@@ -1364,7 +1368,7 @@
 		F840E69E86B9768352F81A477DA061AE /* Signal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Signal.swift; path = RxCocoa/Traits/Signal/Signal.swift; sourceTree = "<group>"; };
 		F8E1A3D590A4A98BB57C93323CBB3D96 /* CwlCatchException.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CwlCatchException.m; path = Carthage/Checkouts/CwlCatchException/Sources/CwlCatchExceptionSupport/CwlCatchException.m; sourceTree = "<group>"; };
 		F8F8B6E72BAA2DDCE8E8F3E5722F1BF0 /* DelegateProxyType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DelegateProxyType.swift; path = RxCocoa/Common/DelegateProxyType.swift; sourceTree = "<group>"; };
-		F8FEACDF70CCE8671B9F1A58B9ED4181 /* ObservableList+UITableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+UITableView.swift"; path = "RxSwiftCollections/Classes/ObservableList+UITableView.swift"; sourceTree = "<group>"; };
+		F8FEACDF70CCE8671B9F1A58B9ED4181 /* ObservableList+UITableView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ObservableList+UITableView.swift"; path = "RxSwiftCollections/Classes/iOS/ObservableList+UITableView.swift"; sourceTree = "<group>"; };
 		FA385401EBBCFD14DD7B1DF7774AA239 /* SingletonObservableList.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SingletonObservableList.swift; path = RxSwiftCollections/Classes/SingletonObservableList.swift; sourceTree = "<group>"; };
 		FA84D3FE90E77141F45F131FDCF2B391 /* IGListKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IGListKit-umbrella.h"; sourceTree = "<group>"; };
 		FB1DEF891CE5ECEDF925D672A6E952AC /* UICollectionView+IGListBatchUpdateData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+IGListBatchUpdateData.m"; path = "Source/Internal/UICollectionView+IGListBatchUpdateData.m"; sourceTree = "<group>"; };
@@ -3261,12 +3265,16 @@
 			files = (
 				F1333206243E6B472BBFAE26C0A7385A /* AssociatedObjectDisposable.swift in Sources */,
 				31899A15CC0901916A9B81888BEFAFC8 /* DifferentialObservableList.swift in Sources */,
+				85C8DD2121C4453B0058745E /* ObservableList+UITableView.swift in Sources */,
 				C4B0031F71D563BB07CD14CCF5CD61D3 /* IndexedObservableList.swift in Sources */,
 				F313CC31A14F5E4DD9C3EA8AE040127A /* MappedObservableList.swift in Sources */,
+				85C8DD2021C445310058745E /* ObservableList+UICollectionViewSections.swift in Sources */,
 				921BA630E5F10DC77A696B0D49B77539 /* ObservableList.swift in Sources */,
 				238CE143EA9143220AA75EDEB0C2B7BC /* ReplaySubjectMap.swift in Sources */,
+				85C8DD1E21C445170058745E /* ObservableList+IGListKit.swift in Sources */,
 				3EA528DAF78B11DD5F100F7A9C63A2FC /* RxSwiftCollections-dummy.m in Sources */,
 				328377F69E05B74645DC659A6E40B033 /* SimpleObservableList.swift in Sources */,
+				85C8DD1F21C445230058745E /* ObservableList+UICollectionView.swift in Sources */,
 				C4B8A4744ACCF315D912CBFA3697AA3B /* SingletonObservableList.swift in Sources */,
 				11ED6280D48C01C3F38096C00FA9A267 /* WrappedObservableList.swift in Sources */,
 			);
