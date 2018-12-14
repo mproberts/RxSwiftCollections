@@ -12,16 +12,20 @@ Pod::Spec.new do |spec|
   spec.author           = { 'Mike Roberts' => 'mike@mpr.io' }
   spec.source           = { :git => 'https://github.com/mproberts/RxSwiftCollections.git', :tag => spec.version.to_s }
 
-  spec.ios.deployment_target = '8.0'
-  spec.osx.deployment_target = '10.14'
-
   spec.source_files = 'RxSwiftCollections/Classes/*'
 
   spec.dependency 'RxSwift',    '~> 4.0'
   spec.dependency 'RxCocoa',    '~> 4.0'
   spec.dependency 'DeepDiff',   '~> 1.2'
 
+  spec.default_subspec = 'iOS'
+
+  spec.subspec 'macOS' do |macosspec|
+      macosspec.osx.deployment_target = '10.14'
+  end
+
   spec.subspec 'iOS' do |iosspec|
+      iosspec.ios.deployment_target = '8.0'
       iosspec.source_files = 'RxSwiftCollections/Classes/**/*'
       iosspec.frameworks = 'UIKit'
       iosspec.dependency 'IGListKit',  '~> 3.4.0'
