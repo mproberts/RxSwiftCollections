@@ -13,12 +13,11 @@ Pod::Spec.new do |spec|
   spec.source           = { :git => 'https://github.com/mproberts/RxSwiftCollections.git', :tag => spec.version.to_s }
 
   spec.ios.deployment_target = '8.0'
+  spec.osx.deployment_target = '10.14'
 
   spec.source_files = 'RxSwiftCollections/Classes/**/*'
-  
-  spec.frameworks = 'UIKit'
+
   spec.dependency 'RxSwift',    '~> 4.0'
   spec.dependency 'RxCocoa',    '~> 4.0'
   spec.dependency 'DeepDiff',   '~> 1.2'
-  spec.dependency 'IGListKit',  '~> 3.4.0'
 end
