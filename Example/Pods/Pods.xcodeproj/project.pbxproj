@@ -1966,7 +1966,8 @@
 				E45828588335EB3006505C06A16A0019 /* ObservableList+UICollectionViewSections.swift */,
 				F8FEACDF70CCE8671B9F1A58B9ED4181 /* ObservableList+UITableView.swift */,
 			);
-			path = iOS;
+			name = iOS;
+			path = RxSwiftCollections/Classes/iOS;
 			sourceTree = "<group>";
 		};
 		8D8B5FB1470D1199367247FADA0A7976 /* Support Files */ = {
