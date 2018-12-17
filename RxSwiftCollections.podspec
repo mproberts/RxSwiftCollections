@@ -20,9 +20,4 @@ Pod::Spec.new do |spec|
   spec.dependency 'RxSwift',    '~> 4.0'
   spec.dependency 'RxCocoa',    '~> 4.0'
   spec.dependency 'DeepDiff',   '~> 1.2'
-
-  spec.subspec 'iOS' do |ios|
-      ios.dependency 'IGListKit',  '~> 3.4.0'
-  end
-
 end
